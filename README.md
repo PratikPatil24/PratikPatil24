@@ -66,9 +66,10 @@ Every source is parsed, chunked and embedded into **one retrieval model**, so no
 - 🚀 **1M retrieval calls/day** across **95M documents** at **sub-second p95**.
 - ⏱️ **10s → 0.5s.** Led a **54M-document** migration from MongoDB to OpenSearch on live traffic — dual-write, then a per-tenant read cutover so any blast radius was one account, not the platform.
 - 💸 **~$130k/yr** off the infra bill from that same migration. Faster *and* cheaper.
-- 🕸️ **200k+ crawl requests/day.** Slot-based, per-account scheduling for a Playwright crawler with back-pressure — *domain* mode means crawling an entire site without becoming a DoS tool pointed at your own tenant.
-- 🦆 **DuckDB over GCS streaming** for 50k-row tables, so peak memory is a function of the query, not the file.
+- 🕸️ **A crawl scheduler with a floor and a ceiling.** Peak budget of **2,000 URLs per mode**; every tenant gets a **50-slot floor** so small accounts are never starved, and a **40% ceiling** so no one takes the crawler hostage. **200k+ requests/day**, fairly shared.
+- 🦆 **200 MB CSVs, never loaded into memory.** Signed URLs → **GCS** → **DuckDB** → **Parquet** streaming, so peak memory is a function of the query rather than the file — no separate fleet sized for the worst spreadsheet anyone uploads.
 - 📈 **Retrieval-quality instrumentation** built *before* the cutover — the only reason the migration could be signed off on numbers instead of opinions.
+- ⚙️ **Standardised logging and tuned HPA.** Consistent structure and correlation so an incident is one query, not an archaeology expedition; autoscaler thresholds matched to the real load shape rather than a peak that rarely arrives.
 
 ---
 
