@@ -37,7 +37,7 @@
 
 ## 🤖 Agent orchestration
 
-**I architected a configurable agentic AI platform — before agent platforms were a product category.**
+**I architected a configurable agentic AI platform in 2023, when the managed ones you can buy today did not exist yet.**
 
 - 🎛️ **Behaviour as configuration.** Prompts, LLM models, tools and profiles supplied through **APIs and message queues** instead of compiled in — changing an agent went from a **release cycle to minutes**, and stayed reviewable while it did.
 - 🧩 **A 7-tool layer**, granted *per profile*: **RAG**, **API**, **Database**, **ClickHouse**, **Python** (sandboxed compute), **Events**, and **Transfer-to-human** — a production assistant is judged as much on when it declines as on when it answers.
@@ -64,11 +64,11 @@
 Every source is parsed, chunked and embedded into **one retrieval model**, so nothing downstream needs to know whether an answer came from a PDF or row 4,812 of a spreadsheet.
 
 - 🚀 **1M retrieval calls/day** across **95M documents** at **sub-second p95**.
-- ⏱️ **10s → 0.5s.** Led a **54M-document** migration from MongoDB to OpenSearch on live traffic — dual-write, then a per-tenant read cutover so any blast radius was one account, not the platform.
+- ⏱️ **10s → 0.5s.** Led the migration of **54M+ documents** from MongoDB to OpenSearch — the change that moved retrieval from a ten-second p85 to a sub-second p95.
 - 💸 **~$130k/yr** off the infra bill from that same migration. Faster *and* cheaper.
 - 🕸️ **A crawl scheduler with a floor and a ceiling.** Peak budget of **2,000 URLs per mode**; every tenant gets a **50-slot floor** so small accounts are never starved, and a **40% ceiling** so no one takes the crawler hostage. **200k+ requests/day**, fairly shared.
 - 🦆 **200 MB CSVs, never loaded into memory.** Signed URLs → **GCS** → **DuckDB** → **Parquet** streaming, so peak memory is a function of the query rather than the file — no separate fleet sized for the worst spreadsheet anyone uploads.
-- 📈 **Retrieval-quality instrumentation** built *before* the cutover — the only reason the migration could be signed off on numbers instead of opinions.
+- 📈 **Retrieval-quality instrumentation**, built with product and customer-success teams — so "is retrieval actually better?" is answered with numbers rather than opinions.
 - ⚙️ **Standardised logging and tuned HPA.** Consistent structure and correlation so an incident is one query, not an archaeology expedition; autoscaler thresholds matched to the real load shape rather than a peak that rarely arrives.
 
 ---
@@ -133,6 +133,7 @@ Every source is parsed, chunked and embedded into **one retrieval model**, so no
 - 🕸️ Ingest throughput — a slot-scheduled crawler at **200k+ requests/day** across tenants
 - 🧪 LangGraph orchestration and the eval harness that makes it shippable
 - 💬 **Open to Lead / Staff AI platform roles** — remote, or hybrid in Pune
+- 🤝 **Available for advisory work** — RAG and retrieval reviews, agent platform architecture, and getting an LLM prototype to something you can run in production
 
 ---
 
