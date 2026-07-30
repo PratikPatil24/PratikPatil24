@@ -10,7 +10,7 @@
 
 ![Role](https://img.shields.io/badge/Lead%20AI%20Engineer-HighLevel-FF4D1C?style=for-the-badge&labelColor=0A0A0C)
 ![Location](https://img.shields.io/badge/Pune-India%20%C2%B7%20UTC%2B5%3A30-8A8A98?style=for-the-badge&labelColor=0A0A0C)
-![Open to](https://img.shields.io/badge/Open%20to-Lead%20%2F%20Staff%20AI%20Platform-3DDC84?style=for-the-badge&labelColor=0A0A0C)
+![Focus](https://img.shields.io/badge/Focus-Retrieval%20%26%20Agent%20Orchestration-3DDC84?style=for-the-badge&labelColor=0A0A0C)
 
 </div>
 
@@ -132,8 +132,7 @@ Every source is parsed, chunked and embedded into **one retrieval model**, so no
 - 🔬 Retrieval-quality instrumentation, and agent tool design that bounds blast radius
 - 🕸️ Ingest throughput — a slot-scheduled crawler at **200k+ requests/day** across tenants
 - 🧪 LangGraph orchestration and the eval harness that makes it shippable
-- 💬 **Open to Lead / Staff AI platform roles** — remote, or hybrid in Pune
-- 🤝 **Available for advisory work** — RAG and retrieval reviews, agent platform architecture, and getting an LLM prototype to something you can run in production
+- 💬 **Always up for a conversation** about retrieval, agent orchestration, or getting an LLM prototype to something you can actually run in production
 
 ---
 
