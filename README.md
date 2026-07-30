@@ -22,6 +22,7 @@
 
 ![KB retrieval](https://img.shields.io/badge/KB%20Retrieval-1M%2Fday-FF4D1C?style=for-the-badge&labelColor=0A0A0C)
 ![Documents](https://img.shields.io/badge/Documents%20Indexed-95M-FF4D1C?style=for-the-badge&labelColor=0A0A0C)
+![Source types](https://img.shields.io/badge/KB%20Source%20Types-4-FF4D1C?style=for-the-badge&labelColor=0A0A0C)
 ![Latency](https://img.shields.io/badge/p95%20Latency-10s%20%E2%86%92%200.5s-FF4D1C?style=for-the-badge&labelColor=0A0A0C)
 
 ![Infra saved](https://img.shields.io/badge/Infra%20Saved-%24130k%2Fyr-FF4D1C?style=for-the-badge&labelColor=0A0A0C)
@@ -49,14 +50,25 @@
 
 ## 🔍 Retrieval at scale
 
-**I own the AI Knowledge Base at HighLevel — the retrieval layer behind every conversational and voice bot on the platform.**
+**I own the AI Knowledge Base at HighLevel — a service, not a search box. It takes whatever a customer already has and turns it into answers every conversational and voice bot on the platform reads from.**
+
+**What a knowledge base can be made of**
+
+| Source | Modes | Ceiling per KB |
+| :-- | :-- | :-- |
+| 💬 **FAQs** | Authored question/answer pairs | — |
+| 🌐 **Websites** | **Exact** (one URL) · **Path** (a subtree) · **Domain** (whole host) | **7,000 URLs** |
+| 📊 **Tables** | CSV · Google Sheets | **50,000 rows** |
+| 📄 **Files** | Markdown · PDF · Word/Docs | **~40 files** |
+
+Every source is parsed, chunked and embedded into **one retrieval model**, so nothing downstream needs to know whether an answer came from a PDF or row 4,812 of a spreadsheet.
 
 - 🚀 **1M retrieval calls/day** across **95M documents** at **sub-second p95**.
 - ⏱️ **10s → 0.5s.** Led a **54M-document** migration from MongoDB to OpenSearch on live traffic — dual-write, then a per-tenant read cutover so any blast radius was one account, not the platform.
 - 💸 **~$130k/yr** off the infra bill from that same migration. Faster *and* cheaper.
-- 🕸️ **200k+ crawl requests/day.** Slot-based, account-level scheduling for a Playwright crawler, with back-pressure — a pathological site slows down its own tenant and nobody else's.
-- 🦆 **DuckDB over GCS streaming** for 250 MB / 100k-row tables, so peak memory is a function of the query, not the file.
-- 📈 **Retrieval-quality instrumentation** built *before* the cutover — which is the only reason the migration could be signed off on numbers instead of opinions.
+- 🕸️ **200k+ crawl requests/day.** Slot-based, per-account scheduling for a Playwright crawler with back-pressure — *domain* mode means crawling an entire site without becoming a DoS tool pointed at your own tenant.
+- 🦆 **DuckDB over GCS streaming** for 50k-row tables, so peak memory is a function of the query, not the file.
+- 📈 **Retrieval-quality instrumentation** built *before* the cutover — the only reason the migration could be signed off on numbers instead of opinions.
 
 ---
 
@@ -108,7 +120,7 @@
 | | What it was | The number |
 | :-- | :-- | :-- |
 | 🤖 **[Agent orchestration as configuration](https://pratikpatil24.github.io/work/configurable-agent-platform)** | A profile-driven agent platform with a 7-tool layer, built before that was a category | **days → minutes** to change behaviour |
-| 🔍 **[Retrieval at a million calls a day](https://pratikpatil24.github.io/work/ai-knowledge-base)** | 95M documents, rebuilt from a 10s p85 to a sub-second p95 | **~$130k/yr** saved |
+| 🔍 **[A knowledge base service](https://pratikpatil24.github.io/work/ai-knowledge-base)** | FAQs, websites, tables and files → 95M documents, 10s p85 to sub-second p95 | **1M calls**/day |
 | 🧮 **[Policy documents into structured data](https://pratikpatil24.github.io/work/policy-data-extraction)** | Multi-tenant extraction and reconciliation that fail loudly, not silently | **2,000+ policies**/day |
 | ⛓️ **[Four products on public chains](https://pratikpatil24.github.io/work/onchain-insurance)** | Led end to end at CakeSoft — marketplace, exchange, mass payments, games | **4 products** led |
 
